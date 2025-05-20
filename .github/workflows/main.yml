@@ -23,4 +23,4 @@ jobs:
       - name: Build and test with Maven
         run: cd TP/backend/simpleapi && mvn clean verify
       - name: SonarCloud Analysis
-        run: cd TP/backend/simpleapi && mvn verify sonar:sonar -Dsonar.projectKey=eduardopolanc -Dsonar.organization=eduardopolanc -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: cd TP/backend/simpleapi && mvn verify sonar:sonar -Dsonar.projectKey=eduardopolanc_Dev-Ops-Eduardo -Dsonar.organization=eduardopolanc -Dsonar.token=${{ secrets.SONAR_TOKEN }}
