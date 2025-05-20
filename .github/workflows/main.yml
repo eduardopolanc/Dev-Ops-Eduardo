@@ -21,4 +21,4 @@ jobs:
           distribution: 'temurin'
       #finally build your app with the latest command
       - name: Build and test with Maven
-        run: cd TP && mvn clean verify
+        run: cd TP/backend/simpleapi && mvn clean verify
