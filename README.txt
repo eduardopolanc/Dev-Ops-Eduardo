@@ -99,3 +99,5 @@ docker push eduardo9703/tp-database:1.0
 
 1-10 Why do we put our images into an online repo?
 because this way we can share our work to other people to make the programming community bigger and better since we are adding more resources to it. Plus, we can have a secure spot where to save our work and reuse it in the future.
+
+test
