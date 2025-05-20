@@ -27,3 +27,17 @@ docker run -d \ #Creating the container with the volume
   database
 
 docker run -p "8080:8080" --net app-network --name adminer -d adminer #running adminer for visualization
+
+1-4 Why do we need a multistage build? And explain each step of this dockerfile.
+
+It is important because it helps to compress the size of the image by running temporary processes and then extracting just the needed output for another process to run. Then, the remining parts that are not needed anymore are removed.
+
+The code to create the multistate image works as follow:
+
+#Build stage: Create an image based on eclipse-temurin:21-jdk-alpine to compile the app into .jar files needed for future processes with maven.
+
+# Run stage: Copy the .jar files generated and run then with ENTRYPOINT.
+
+at the end, docker just keep the last image called with FROM and delete all the others, in this case, deletes myapp-build.
+
+
