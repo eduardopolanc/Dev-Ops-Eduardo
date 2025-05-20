@@ -44,3 +44,58 @@ at the end, docker just keep the last image called with FROM and delete all the 
 We need it for two main things:
 	1. security: with a reverse proxy the user cannot access some parts of the application directly. In this case, the backend.
 	2. Convenience: it is easier to the user to access all the parts we are wishing to show from one single port than to different ports. this way the user connects to the proxy and the proxy redirect all the trafic.
+
+1-6 Why is docker-compose so important?
+Because it help us to create multiple images at the same time dispite Dockerfile which can handle just one image creation. Docker-compose execute multiple dockerfiles.
+
+1-7 Document docker-compose most important commands.
+
+docker-compose up -d
+
+1-8 Document your docker-compose file.
+
+KEY COMMANDS:
+
+  backend:  # Creates the backend image
+    build:
+      context: ./backend_api/simpleapi  # Location of the Dockerfile
+    networks:
+      - app-network  # Configuring the network to be used
+    depends_on:
+      - database  # Building dependency with database container
+
+  database:  # Creating database image
+    build:
+      context: ./database  # Location of the Dockerfile
+    networks:
+      - app-network  # Configuring the network to be used
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Configuring volume to store DB data.
+
+  httpd:  # Create http image
+    build:
+      context: ./http-server  # Location of the Dockerfile
+    ports:
+      - "8082:80"  # configuring port to be used
+    networks:
+      - app-network  # Configuring the network to be used
+    depends_on:
+      - backend  # Building depedency
+
+networks:
+  app-network:  # Defining network
+
+volumes:
+  pgdata:  # Defining volume
+
+1-9 Document your publication commands and published images in dockerhub.
+docker tag tp-database eduardo9703/tp-database:1.0
+docker tag tp-backend eduardo9703/tp-backend:1.0
+docker tag tp-httpd eduardo9703/tp-httpd:1.0
+
+docker push eduardo9703/tp-httpd:1.0
+docker push eduardo9703/tp-backend:1.0
+docker push eduardo9703/tp-database:1.0
+
+1-10 Why do we put our images into an online repo?
+because this way we can share our work to other people to make the programming community bigger and better since we are adding more resources to it. Plus, we can have a secure spot where to save our work and reuse it in the future.
