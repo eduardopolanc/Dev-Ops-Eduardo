@@ -40,4 +40,7 @@ The code to create the multistate image works as follow:
 
 at the end, docker just keep the last image called with FROM and delete all the others, in this case, deletes myapp-build.
 
-
+1-5 Why do we need a reverse proxy?
+We need it for two main things:
+	1. security: with a reverse proxy the user cannot access some parts of the application directly. In this case, the backend.
+	2. Convenience: it is easier to the user to access all the parts we are wishing to show from one single port than to different ports. this way the user connects to the proxy and the proxy redirect all the trafic.
