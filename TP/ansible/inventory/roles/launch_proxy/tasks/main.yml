@@ -3,7 +3,7 @@
 - name: Run HTTPD launch_proxy
   docker_container:
     name: proxy
-    image: eduardo9703/tp-httpd:latest
+    image: eduardo9703/proxy:latest
     ports:
       - "80:80"
     networks:
