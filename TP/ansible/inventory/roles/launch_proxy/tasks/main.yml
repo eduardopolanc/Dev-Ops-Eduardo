@@ -9,7 +9,7 @@
   docker_container:
     name: proxy
     image: eduardo9703/proxy:latest
-    force_pull: true
+    pull: true
     ports:
       - "80:80"
     networks:

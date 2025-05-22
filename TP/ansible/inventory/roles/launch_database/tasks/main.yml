@@ -9,7 +9,7 @@
   docker_container:
     name: Database
     image: eduardo9703/database:latest
-    force_pull: true
+    pull: true
     env:
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: pwd

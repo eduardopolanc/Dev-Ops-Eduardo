@@ -6,7 +6,7 @@
 - name: Run backend app container
   docker_container:
     name: backend
-    force_pull: true
+    pull: true
     image: eduardo9703/backend:latest
     env:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://database:5432/database"
