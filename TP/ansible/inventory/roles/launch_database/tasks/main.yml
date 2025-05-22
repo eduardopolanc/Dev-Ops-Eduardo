@@ -1,10 +1,15 @@
 ---
 # tasks file for roles/launch_database
+- name: Remove old database container
+  docker_container:
+    name: database
+    state: absent
 
 - name: Run database container
   docker_container:
     name: Database
     image: eduardo9703/database:latest
+    force_pull: true
     env:
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: pwd

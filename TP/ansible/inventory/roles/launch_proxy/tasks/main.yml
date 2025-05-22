@@ -1,9 +1,15 @@
 ---
 # tasks file for roles/launch_proxy
+- name: Remove old proxy container
+  docker_container:
+    name: proxy
+    state: absent
+
 - name: Run HTTPD launch_proxy
   docker_container:
     name: proxy
     image: eduardo9703/proxy:latest
+    force_pull: true
     ports:
       - "80:80"
     networks:
