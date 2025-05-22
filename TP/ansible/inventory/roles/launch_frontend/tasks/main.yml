@@ -1,0 +1,15 @@
+---
+# tasks file for launch_frontend
+- name: Remove old frontend container
+  docker_container:
+    name: frontend
+    state: absent
+
+- name: Start frontend container
+  docker_container:
+    name: frontend
+    image: eduardo9703/frontend:latest
+    pull: true
+
+    networks:
+      - name: app-network
