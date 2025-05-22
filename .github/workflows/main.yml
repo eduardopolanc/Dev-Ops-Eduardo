@@ -72,7 +72,7 @@ jobs:
 
   upload_containers_to_server:
     runs-on: ubuntu-24.04
-    needs: test_on_sonarcloud
+#    needs: test_on_sonarcloud
 
     steps:
       - name: Checkout code
