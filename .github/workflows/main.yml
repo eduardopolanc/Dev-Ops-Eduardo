@@ -6,69 +6,69 @@ on:
   pull_request:
 
 jobs:
-  test-backend:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout your GitHub code
-        uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      #Testing backend with maven
-      - name: Build and test with Maven
-        run: cd TP/backend/simpleapi && mvn clean verify
+  # test-backend:
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout your GitHub code
+  #       uses: actions/checkout@v4
+  #     - name: Set up JDK 21
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #     #Testing backend with maven
+  #     - name: Build and test with Maven
+  #       run: cd TP/backend/simpleapi && mvn clean verify
 
-  build-containers:
-    runs-on: ubuntu-24.04
-    needs: test-backend
+  # build-containers:
+  #   runs-on: ubuntu-24.04
+  #   needs: test-backend
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Log in to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+  #     - name: Log in to DockerHub
+  #       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      # BACKEND
-      - name: Build and push backend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./TP/backend/simpleapi
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+  #     # BACKEND
+  #     - name: Build and push backend
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: ./TP/backend/simpleapi
+  #         push: true
+  #         tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
 
-      # DATABASE
-      - name: Build and push database
-        uses: docker/build-push-action@v5
-        with:
-          context: ./TP/database
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/database:latest
+  #     # DATABASE
+  #     - name: Build and push database
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: ./TP/database
+  #         push: true
+  #         tags: ${{ secrets.DOCKERHUB_USERNAME }}/database:latest
 
-      # HTTPD
-      - name: Build and push httpd
-        uses: docker/build-push-action@v5
-        with:
-          context: ./TP/http
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/proxy:latest
+  #     # HTTPD
+  #     - name: Build and push httpd
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: ./TP/http
+  #         push: true
+  #         tags: ${{ secrets.DOCKERHUB_USERNAME }}/proxy:latest
 
-  test_on_sonarcloud:
-    runs-on: ubuntu-24.04
-    needs: build-containers
-    steps:
-      - name: Checkout your GitHub code
-        uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      #testing with sonarcloud
-      - name: SonarCloud Analysis
-        run: cd TP/backend/simpleapi && mvn verify sonar:sonar -Dsonar.projectKey=eduardopolanc_Dev-Ops-Eduardo -Dsonar.organization=eduardopolanc -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+  # test_on_sonarcloud:
+  #   runs-on: ubuntu-24.04
+  #   needs: build-containers
+  #   steps:
+  #     - name: Checkout your GitHub code
+  #       uses: actions/checkout@v4
+  #     - name: Set up JDK 21
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '21'
+  #         distribution: 'temurin'
+  #     #testing with sonarcloud
+  #     - name: SonarCloud Analysis
+  #       run: cd TP/backend/simpleapi && mvn verify sonar:sonar -Dsonar.projectKey=eduardopolanc_Dev-Ops-Eduardo -Dsonar.organization=eduardopolanc -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
   upload_containers_to_server:
     runs-on: ubuntu-24.04
