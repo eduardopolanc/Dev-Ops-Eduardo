@@ -5,6 +5,7 @@
   roles:
     - install_docker
     - create_network
+    - launch_frontend
     - launch_app
     - launch_database
     - launch_proxy

@@ -55,6 +55,16 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/proxy:latest
 
+      # frontend
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./TP/frontend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+
+
+#wdas
   test_on_sonarcloud:
     runs-on: ubuntu-24.04
     needs: build-containers

@@ -17,6 +17,14 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  frontend:
+    build:
+      context: ./frontend
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
   httpd:
     build:
       context: ./http
