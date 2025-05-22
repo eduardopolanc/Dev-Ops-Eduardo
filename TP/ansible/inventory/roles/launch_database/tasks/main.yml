@@ -4,7 +4,7 @@
 - name: Run database container
   docker_container:
     name: Database
-    image: eduardo9703/proxy:latest
+    image: eduardo9703/database:latest
     env:
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: pwd
