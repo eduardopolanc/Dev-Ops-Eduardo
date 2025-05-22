@@ -12,4 +12,4 @@
     pull: true
 
     networks:
-      - name: app-network
+      - name: my_network
