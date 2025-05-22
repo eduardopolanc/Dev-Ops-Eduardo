@@ -1,0 +1,12 @@
+- name: Run backend app container
+  docker_container:
+    name: backend
+    image: eduardo9703/backend:latest
+    env:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://database:5432/database"
+      SPRING_DATASOURCE_USERNAME: "usr"
+      SPRING_DATASOURCE_PASSWORD: "pwd"
+    networks:
+      - name: my_network
+    ports:
+      - "8080:8080"

@@ -1,0 +1,13 @@
+---
+# tasks file for roles/install_docker
+- name: Install docker using apt
+  apt:
+    name: docker.io
+    state: present
+    update_cache: yes
+
+- name: Start and enable docker
+  service:
+    name: docker
+    enabled: true
+    state: started

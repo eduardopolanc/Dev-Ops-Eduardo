@@ -1,0 +1,10 @@
+- name: Deploy my app
+  hosts: all
+  become: true
+
+  roles:
+    - install_docker
+    - create_network
+    - launch_app
+    - launch_database
+    - launch_proxy
