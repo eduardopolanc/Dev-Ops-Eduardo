@@ -69,7 +69,7 @@ jobs:
         run: cd TP/backend/simpleapi && mvn verify sonar:sonar -Dsonar.projectKey=eduardopolanc_Dev-Ops-Eduardo -Dsonar.organization=eduardopolanc -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
   upload_containers_to_server:
-    runs_on: ubuntu-24.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
